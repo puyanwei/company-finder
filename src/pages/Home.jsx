@@ -1,8 +1,9 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import './home.scss';
 
 const Home = () => {
 	const inputValue = useRef('');
+	const [ data, setData ] = useState(null);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -17,13 +18,13 @@ const Home = () => {
 		myHeaders.append('Content-Type', 'text/plain; charset=ISO-8859-1');
 
 		fetch(url)
-			.then((res) => {
-				return res.text();
+			.then((response) => {
+				return response.text();
 			})
-			.then((data) => {
-				let hash = data.replace('nameCallback(', '');
+			.then((result) => {
+				let hash = result.replace('nameCallback(', '');
 				hash = hash.slice(0, -1);
-				console.log(JSON.parse(hash));
+				setData(JSON.parse(hash));
 			})
 			.catch((err) => console.log(err));
 	};
@@ -36,6 +37,18 @@ const Home = () => {
 				<input type="text" placeholder="Enter GUID here" ref={inputValue} />
 				<button type="submit">Fetch Company Details!</button>
 			</form>
+
+			{data ? (
+				<div className="results-container">
+					<ul>
+						{data.Names.map((company) => (
+							<li key={company.Abn}>
+								{company.Abn} {company.Name} {company.Score}
+							</li>
+						))}
+					</ul>
+				</div>
+			) : null}
 		</div>
 	);
 };
