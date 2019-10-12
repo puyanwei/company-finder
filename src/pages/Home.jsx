@@ -2,15 +2,15 @@ import React, { useState, useRef } from 'react';
 import './home.scss';
 
 const Home = () => {
-	const inputValue = useRef('');
+	const guidValue = useRef('');
+	const lookupValue = useRef('');
 	const [ data, setData ] = useState(null);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting...');
-		const name = 'Apple';
-
-		const guid = inputValue.current.value;
+		const name = lookupValue.current.value;
+		const guid = guidValue.current.value;
 
 		const url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${name}&guid=${guid}`;
 
@@ -34,7 +34,8 @@ const Home = () => {
 			<h1>Company Finder</h1>
 
 			<form onSubmit={(e) => handleSubmit(e)}>
-				<input type="text" placeholder="Enter GUID here" ref={inputValue} />
+				<input type="text" placeholder="Enter GUID here" ref={guidValue} />
+				<input type="text" placeholder="Company Lookup" ref={lookupValue} />
 				<button type="submit">Fetch Company Details!</button>
 			</form>
 
