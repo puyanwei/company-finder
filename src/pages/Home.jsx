@@ -36,17 +36,20 @@ const Home = () => {
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<input type="text" placeholder="Enter GUID here" ref={guidValue} />
 				<input type="text" placeholder="Company Lookup" ref={lookupValue} />
-				<button type="submit">Fetch Company Details!</button>
+				<button type="submit">Submit</button>
 			</form>
 
 			{data ? (
 				<div className="results-container">
 					<ul>
-						{data.Names.map((company) => (
-							<li key={company.Abn}>
-								{company.Abn} {company.Name} {company.Score}
-							</li>
-						))}
+						{data.Names.map((company) => {
+							const { Name, Abn, Score } = company;
+							return (
+								<li key={`${Abn} ${Name}`}>
+									{Abn} {Name} {Score}
+								</li>
+							);
+						})}
 					</ul>
 				</div>
 			) : null}

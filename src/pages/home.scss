@@ -1,5 +1,18 @@
 .homepage-container {
 	margin: 1rem;
+
+	form {
+		input {
+			display: inline-block;
+			margin: 0 1rem;
+		}
+
+		button {
+			display: block;
+			margin: 1rem auto;
+		}
+	}
+
 	.results-container {
 		text-align: left;
 	}
