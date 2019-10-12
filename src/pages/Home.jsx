@@ -41,16 +41,22 @@ const Home = () => {
 
 			{data ? (
 				<div className="results-container">
-					<ul>
-						{data.Names.map((company) => {
-							const { Name, Abn, Score } = company;
-							return (
-								<li key={`${Abn} ${Name}`}>
-									{Abn} {Name} {Score}
-								</li>
-							);
-						})}
-					</ul>
+					{data.Names.length === 0 ? (
+						<p>
+							No results for <span className="lookup">{lookupValue.current.value}</span>
+						</p>
+					) : (
+						<ul>
+							{data.Names.map((company) => {
+								const { Name, Abn, Score } = company;
+								return (
+									<li key={`${Abn} ${Name}`}>
+										{Abn} {Name} {Score}
+									</li>
+								);
+							})}
+						</ul>
+					)}
 				</div>
 			) : null}
 		</div>
