@@ -14,14 +14,16 @@ const Home = () => {
 		const url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${name}&guid=${guid}`;
 
 		const myHeaders = new Headers();
-		myHeaders.append('Content-Type', 'application/json; charset=ISO-8859-1');
+		myHeaders.append('Content-Type', 'text/plain; charset=ISO-8859-1');
 
 		fetch(url)
 			.then((res) => {
 				return res.text();
 			})
 			.then((data) => {
-				console.log(data);
+				let hash = data.replace('nameCallback(', '');
+				hash = hash.slice(0, -1);
+				console.log(JSON.parse(hash));
 			})
 			.catch((err) => console.log(err));
 	};
