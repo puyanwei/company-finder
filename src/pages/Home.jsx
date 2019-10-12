@@ -5,6 +5,7 @@ const Home = () => {
 	const guidValue = useRef('');
 	const lookupValue = useRef('');
 	const [ data, setData ] = useState(null);
+	const [ isError, setIsError ] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -26,7 +27,10 @@ const Home = () => {
 				hash = hash.slice(0, -1);
 				setData(JSON.parse(hash));
 			})
-			.catch((err) => console.log(err));
+			.catch((err) => {
+				console.log(err);
+				setIsError(true);
+			});
 	};
 
 	return (
@@ -39,9 +43,11 @@ const Home = () => {
 				<button type="submit">Submit</button>
 			</form>
 
+			{isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
+
 			{data ? (
 				<div className="results-container">
-					{data.Names.length === 0 ? (
+					{data.Message.length !== 0 && !isError ? (
 						<p>
 							No results for <span className="lookup">{lookupValue.current.value}</span>
 						</p>

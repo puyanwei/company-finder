@@ -5,12 +5,17 @@
 		input {
 			display: inline-block;
 			margin: 0 1rem;
+			text-align: center;
 		}
 
 		button {
 			display: block;
 			margin: 1rem auto;
 		}
+	}
+
+	.error-message {
+		color: red;
 	}
 
 	.results-container {
