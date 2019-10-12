@@ -6,7 +6,24 @@ const Home = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log('submits');
+		console.log('submitting...');
+		const name = 'Apple';
+
+		const guid = inputValue.current.value;
+
+		const url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${name}&guid=${guid}`;
+
+		const myHeaders = new Headers();
+		myHeaders.append('Content-Type', 'application/json; charset=ISO-8859-1');
+
+		fetch(url)
+			.then((res) => {
+				return res.text();
+			})
+			.then((data) => {
+				console.log(data);
+			})
+			.catch((err) => console.log(err));
 	};
 
 	return (
