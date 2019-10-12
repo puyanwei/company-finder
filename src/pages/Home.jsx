@@ -3,17 +3,17 @@ import './home.scss';
 
 const Home = () => {
 	const guidValue = useRef('');
-	const lookupValue = useRef('');
+	const queryValue = useRef('');
 	const [ data, setData ] = useState(null);
 	const [ isError, setIsError ] = useState(false);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting...');
-		const name = lookupValue.current.value;
-		const guid = guidValue.current.value;
+		const query = queryValue.current.value;
+		let guid = guidValue.current.value;
 
-		const url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${name}&guid=${guid}`;
+		const url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${query}&guid=${guid}`;
 
 		const myHeaders = new Headers();
 		myHeaders.append('Content-Type', 'text/plain; charset=ISO-8859-1');
@@ -26,6 +26,8 @@ const Home = () => {
 				let hash = result.replace('nameCallback(', '');
 				hash = hash.slice(0, -1);
 				setData(JSON.parse(hash));
+				guidValue.current.value = '';
+				queryValue.current.value = '';
 			})
 			.catch((err) => {
 				console.log(err);
@@ -38,8 +40,8 @@ const Home = () => {
 			<h1>Company Finder</h1>
 
 			<form onSubmit={(e) => handleSubmit(e)}>
-				<input type="text" placeholder="Enter GUID here" ref={guidValue} />
-				<input type="text" placeholder="Company Lookup" ref={lookupValue} />
+				<input type="text" placeholder="Enter GUID here" ref={guidValue} required />
+				<input type="text" placeholder="Company Lookup" ref={queryValue} required />
 				<button type="submit">Submit</button>
 			</form>
 
@@ -49,7 +51,7 @@ const Home = () => {
 				<div className="results-container">
 					{data.Message.length !== 0 && !isError ? (
 						<p>
-							No results for <span className="lookup">{lookupValue.current.value}</span>
+							No results for <span className="lookup">{queryValue.current.value}</span>
 						</p>
 					) : (
 						<ul>
