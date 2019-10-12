@@ -4,7 +4,11 @@ import './home.scss';
 const Home = () => {
 	return (
 		<div className="homepage-container">
-			<h1>This is the Homepage</h1>
+			<h1>Company Finder</h1>
+			<form>
+				<input type="text" />
+				<button type="submit">Fetch Company Details!</button>
+			</form>
 		</div>
 	);
 };
