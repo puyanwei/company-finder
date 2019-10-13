@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-const Company = ({ data }) => {
-	const { Name, Abn, Score } = data;
+import './company.scss';
+
+const Company = ({ companyData }) => {
+	const [ isHidden, setIsHidden ] = useState(true);
+
+	const { Name, Abn, Score } = companyData;
 	return (
-		<li>
-			{Abn} {Name} {Score}
+		<li className="company-title" onClick={() => setIsHidden(!isHidden)}>
+			{Name} {Abn}
+			{!isHidden ? (
+				<ul>
+					{Object.keys(companyData).map((key) => (
+						<li className="company-details">
+							{key}: {companyData[key]}
+						</li>
+					))}
+				</ul>
+			) : null}
 		</li>
 	);
 };

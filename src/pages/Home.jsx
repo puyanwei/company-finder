@@ -60,7 +60,7 @@ const Home = () => {
 					{data.Message.length === 0 && !isError ? (
 						<ul>
 							{data.Names.map((company) => (
-								<Company key={`${company.Abn} ${company.Name}`} data={company} />
+								<Company key={`${company.Name} ${company.Abn}`} companyData={company} />
 							))}
 						</ul>
 					) : (
