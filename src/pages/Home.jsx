@@ -42,11 +42,8 @@ const Home = () => {
 				return response.text();
 			})
 			.then((result) => {
-				console.log({ removeString });
 				let hash = result.replace(removeString, '');
 				hash = hash.slice(0, -1);
-				console.log('hash', hash);
-				console.log(JSON.parse(hash));
 				setData(JSON.parse(hash));
 				setIsLoading(false);
 				guidValue.current.value = '';
@@ -77,9 +74,14 @@ const Home = () => {
 				<div className="results-container">
 					{data.Message.length === 0 && !isError ? (
 						<ul>
-							{data.Names.map((company) => (
+							{data.EntityName?
+							<Company key={`${data.EntityName} ${data.Abn}`} companyData={data} />
+                            :
+							<>{data.Names.map((company) => (
 								<Company key={`${company.Name} ${company.Abn}`} companyData={company} />
 							))}
+                            </>
+							}
 						</ul>
 					) : (
 						<p>
