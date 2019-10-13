@@ -65,13 +65,15 @@ const Home = () => {
             <p className="homepage-description">Search by ABN or name. You will need a GUID key to search.</p>
 
 			<form onSubmit={(e) => handleSubmit(e)}>
-                <label>GUID key</label>
-				<input type="text" ref={guidValue} required />
-                <br/>
-                <label>Search</label>
-				<input type="text" ref={queryValue} required />
-                <br/>
-				<button type="submit">Submit</button>
+                <div className="container-input">
+                    <label>GUID KEY</label>
+                    <input type="text" ref={guidValue} required />
+                </div>
+                <div className="container-input">
+                    <label>SEARCH</label>
+                    <input type="text" ref={queryValue} required />
+                </div>
+				<button type="submit">SUBMIT</button>
 			</form>
 
 			{isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
