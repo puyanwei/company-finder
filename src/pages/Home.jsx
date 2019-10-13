@@ -45,15 +45,17 @@ const Home = () => {
 				let hash = result.replace(removeString, '');
 				hash = hash.slice(0, -1);
 				setData(JSON.parse(hash));
-				setIsLoading(false);
-				guidValue.current.value = '';
-				queryValue.current.value = '';
 			})
 			.catch((err) => {
 				console.log(err);
 				setIsLoading(false);
 				setIsError(true);
-			});
+            })
+            .finally(()=> {
+                setIsLoading(false);
+				guidValue.current.value = '';
+				queryValue.current.value = '';
+            })
 	};
 
 	return (
@@ -75,10 +77,11 @@ const Home = () => {
 					{data.Message.length === 0 && !isError ? (
 						<ul>
 							{data.EntityName?
-							<Company key={`${data.EntityName} ${data.Abn}`} companyData={data} />
+							<Company key={`${data.EntityName} ${data.Abn}`} companyData={data} title={data.EntityName} />
                             :
-							<>{data.Names.map((company) => (
-								<Company key={`${company.Name} ${company.Abn}`} companyData={company} />
+							<>
+                            {data.Names.map((company) => (
+								<Company key={`${company.Name} ${company.Abn}`} companyData={company} title={company.Name} />
 							))}
                             </>
 							}

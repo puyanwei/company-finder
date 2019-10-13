@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 import './company.scss';
 
-const Company = ({ companyData }) => {
+const Company = ({ companyData, title }) => {
 	const [ isHidden, setIsHidden ] = useState(true);
 
-	const { Name, Abn } = companyData;
+	const { Abn } = companyData;
 	return (
 		<li className="company-title" onClick={() => setIsHidden(!isHidden)}>
-			{Name} {Abn}
+			{title}
 			{!isHidden ? (
 				<ul>
 					{Object.keys(companyData).map((key) => (
