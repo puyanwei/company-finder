@@ -60,7 +60,7 @@ const Home = () => {
 
 	return (
 		<div className="homepage-container">
-			<h1 className="homepage-title">ABN Lookup</h1>
+			<h1 className="homepage-title">ABN LOOKUP</h1>
 
             <p className="homepage-description">Search by ABN or name. You will need a GUID key to search.</p>
 
