@@ -1,16 +1,37 @@
 .homepage-container {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	// prettier-ignore
+	grid-template-areas: 
+        "title title" 
+        "desc desc" 
+        "form form"
+        "button button"
+        "results results";
 	margin: 1rem;
 
+	.homepage-title {
+		grid-area: title;
+	}
+	.homepage-description {
+		grid-area: desc;
+	}
+
 	form {
+		grid-area: form;
+
 		input {
 			display: inline-block;
-			margin: 0 1rem;
+			margin: 0 1rem 1rem 1rem;
 			text-align: center;
 		}
 
+		input:nth-child(2) {
+			margin-right: 2rem;
+		}
+
 		button {
-			display: block;
-			margin: 1rem auto;
+			grid-area: button;
 		}
 	}
 
@@ -19,6 +40,7 @@
 	}
 
 	.results-container {
+		grid-area: results;
 		text-align: left;
 		.lookup {
 			color: red;

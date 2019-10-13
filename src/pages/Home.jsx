@@ -17,7 +17,7 @@ const Home = () => {
 		nameOrABNQueryURL();
 	};
 
-	const nameOrABNQueryURL = async () => {
+	const nameOrABNQueryURL = () => {
 		let query = queryValue.current.value;
 		let guid = guidValue.current.value;
 		let removeString;
@@ -60,11 +60,17 @@ const Home = () => {
 
 	return (
 		<div className="homepage-container">
-			<h1>Company Finder</h1>
+			<h1 className="homepage-title">ABN Lookup</h1>
+
+            <p className="homepage-description">Search by ABN or name. You will need a GUID key to search.</p>
 
 			<form onSubmit={(e) => handleSubmit(e)}>
-				<input type="text" placeholder="Enter GUID here" ref={guidValue} required />
-				<input type="text" placeholder="Company name or ABN" ref={queryValue} required />
+                <label>GUID key</label>
+				<input type="text" ref={guidValue} required />
+                <br/>
+                <label>Search</label>
+				<input type="text" ref={queryValue} required />
+                <br/>
 				<button type="submit">Submit</button>
 			</form>
 
