@@ -11,7 +11,7 @@ const Home = () => {
 	const [ isLoading, setIsLoading ] = useState(false);
 
 	const handleSubmit = (e) => {
-		e.preventDefault();
+        e.preventDefault();
 		console.log('submitting...');
 		setIsLoading(true);
 		nameOrABNQueryURL();
@@ -53,12 +53,11 @@ const Home = () => {
             })
             .finally(()=> {
                 setIsLoading(false);
-				guidValue.current.value = '';
-				queryValue.current.value = '';
             })
 	};
 
 	return (
+        <>
 		<div className="homepage-container">
 			<h1 className="homepage-title">ABN LOOKUP</h1>
 
@@ -78,30 +77,34 @@ const Home = () => {
 
 			{isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
 
+		</div>
 			{isLoading ? (
-				<h2>Loading...</h2>
+				<h2>LOADING...</h2>
 			) : data ? (
 				<div className="results-container">
 					{data.Message.length === 0 && !isError ? (
-						<ul>
-							{data.EntityName?
-							<Company key={`${data.EntityName} ${data.Abn}`} companyData={data} title={data.EntityName} />
-                            :
-							<>
-                            {data.Names.map((company) => (
-								<Company key={`${company.Name} ${company.Abn}`} companyData={company} title={company.Name} />
-							))}
-                            </>
-							}
-						</ul>
+                        <>
+                            <p className="query-message">RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
+                            <ul>
+                                {data.EntityName?
+                                <Company key={`${data.EntityName} ${data.Abn}`} companyData={data} title={data.EntityName} />
+                                :
+                                <>
+                                {data.Names.map((company) => (
+                                    <Company key={`${company.Name} ${company.Abn}`} companyData={company} title={company.Name} />
+                                ))}
+                                </>
+                                }
+                            </ul>
+                        </>
 					) : (
-						<p>
-							No results for <span className="lookup">{queryValue.current.value}</span>
+						<p className="query-message">
+							NO RESULTS FOR <span className="query">"{queryValue.current.value}"</span>
 						</p>
 					)}
 				</div>
-			) : null}
-		</div>
+            ) : null}
+        </>
 	);
 };
 
