@@ -13,37 +13,39 @@ const Home = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting...');
-		let query = queryValue.current.value;
-		let guid = guidValue.current.value;
 		setIsLoading(true);
-
-		return nameOrABNQuery(query, guid);
+		nameOrABNQueryURL();
 	};
 
-	const nameOrABNQuery = (query, guid) => {
-		let url;
+	const nameOrABNQueryURL = async () => {
+		let query = queryValue.current.value;
+		let guid = guidValue.current.value;
 		let removeString;
+		let url;
 
+		if (typeof Number(query) === 'number' && query.length === 11) {
+			url = `AbnDetails.aspx?callback=callback&abn=${query}&guid=${guid}`;
+			removeString = 'callback(';
+		} else {
+			url = `MatchingNames.aspx?callback=nameCallback&name=${query}&guid=${guid}`;
+			removeString = 'nameCallback(';
+		}
+		fetchData(url, removeString);
+	};
+
+	const fetchData = (url, removeString) => {
 		const myHeaders = new Headers();
 		myHeaders.append('Content-Type', 'text/plain; charset=ISO-8859-1');
 
-		if (typeof Number(query) === 'number' && query.length === 11) {
-			console.log(`number`);
-			url = `https://abr.business.gov.au/json/AbnDetails.aspx?callback=callback&abn=${query}&guid=${guid}`;
-			removeString = 'callback(';
-		} else {
-			console.log(`names`);
-			url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${query}&guid=${guid}`;
-			removeString = 'nameCallback(';
-		}
-
-		fetch(url)
+		fetch(`https://abr.business.gov.au/json/${url}`)
 			.then((response) => {
 				return response.text();
 			})
 			.then((result) => {
+				console.log({ removeString });
 				let hash = result.replace(removeString, '');
 				hash = hash.slice(0, -1);
+				console.log('hash', hash);
 				console.log(JSON.parse(hash));
 				setData(JSON.parse(hash));
 				setIsLoading(false);
