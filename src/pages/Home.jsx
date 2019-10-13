@@ -57,7 +57,7 @@ const Home = () => {
 				<h2>Loading...</h2>
 			) : data ? (
 				<div className="results-container">
-					{data.Message.length === 0 && isError ? (
+					{data.Message.length === 0 && !isError ? (
 						<ul>
 							{data.Names.map((company) => (
 								<Company key={`${company.Abn} ${company.Name}`} data={company} />
