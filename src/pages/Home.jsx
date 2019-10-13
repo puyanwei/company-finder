@@ -13,22 +13,38 @@ const Home = () => {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting...');
-		const query = queryValue.current.value;
+		let query = queryValue.current.value;
 		let guid = guidValue.current.value;
 		setIsLoading(true);
 
-		const url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${query}&guid=${guid}`;
+		return nameOrABNQuery(query, guid);
+	};
+
+	const nameOrABNQuery = (query, guid) => {
+		let url;
+		let removeString;
 
 		const myHeaders = new Headers();
 		myHeaders.append('Content-Type', 'text/plain; charset=ISO-8859-1');
+
+		if (typeof Number(query) === 'number' && query.length === 11) {
+			console.log(`number`);
+			url = `https://abr.business.gov.au/json/AbnDetails.aspx?callback=callback&abn=${query}&guid=${guid}`;
+			removeString = 'callback(';
+		} else {
+			console.log(`names`);
+			url = `https://abr.business.gov.au/json/MatchingNames.aspx?callback=nameCallback&name=${query}&guid=${guid}`;
+			removeString = 'nameCallback(';
+		}
 
 		fetch(url)
 			.then((response) => {
 				return response.text();
 			})
 			.then((result) => {
-				let hash = result.replace('nameCallback(', '');
+				let hash = result.replace(removeString, '');
 				hash = hash.slice(0, -1);
+				console.log(JSON.parse(hash));
 				setData(JSON.parse(hash));
 				setIsLoading(false);
 				guidValue.current.value = '';
@@ -47,7 +63,7 @@ const Home = () => {
 
 			<form onSubmit={(e) => handleSubmit(e)}>
 				<input type="text" placeholder="Enter GUID here" ref={guidValue} required />
-				<input type="text" placeholder="Company Lookup" ref={queryValue} required />
+				<input type="text" placeholder="Company name or ABN" ref={queryValue} required />
 				<button type="submit">Submit</button>
 			</form>
 
