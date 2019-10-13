@@ -34,14 +34,19 @@
 
 			input {
 				display: inline-block;
-				margin-bottom: 1rem;
+				width: 14rem;
 				background: transparent;
 				border: none;
 				border-bottom: 1px solid #526b66;
 				color: whitesmoke;
+				margin-bottom: 1rem;
 				padding-left: 0.5rem;
 				padding-right: 0.5rem;
 				font-family: 'Roboto Condensed', sans-serif;
+			}
+
+			input:focus {
+				outline: none;
 			}
 		}
 
@@ -56,7 +61,7 @@
 			width: 8rem;
 			height: 2rem;
 			border: none;
-			font-size: 16px;
+			font-size: 14px;
 			cursor: pointer;
 			margin: 0 auto;
 			margin-top: 1rem;
@@ -66,14 +71,29 @@
 	}
 
 	.error-message {
-		color: red;
+		color: rgb(216, 78, 91);
+		margin: 0 auto;
+	}
+}
+
+.results-container {
+	padding: 1rem;
+	border: 1px solid whitesmoke;
+	margin-left: 5rem;
+	margin-right: 5rem;
+	grid-area: results;
+	text-align: left;
+
+	.query-message {
+		text-align: center;
+		margin-top: 1rem;
+		.query {
+			font-size: 20px;
+			color: rgb(216, 78, 91);
+		}
 	}
 
-	.results-container {
-		grid-area: results;
-		text-align: left;
-		.lookup {
-			color: red;
-		}
+	ul {
+		list-style-type: none;
 	}
 }
