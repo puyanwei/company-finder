@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+
+import Company from '../components/Company';
 import './home.scss';
 
 const Home = () => {
@@ -55,21 +57,16 @@ const Home = () => {
 				<h2>Loading...</h2>
 			) : data ? (
 				<div className="results-container">
-					{data.Message.length !== 0 && !isError ? (
+					{data.Message.length === 0 && isError ? (
+						<ul>
+							{data.Names.map((company) => (
+								<Company key={`${company.Abn} ${company.Name}`} data={company} />
+							))}
+						</ul>
+					) : (
 						<p>
 							No results for <span className="lookup">{queryValue.current.value}</span>
 						</p>
-					) : (
-						<ul>
-							{data.Names.map((company) => {
-								const { Name, Abn, Score } = company;
-								return (
-									<li key={`${Abn} ${Name}`}>
-										{Abn} {Name} {Score}
-									</li>
-								);
-							})}
-						</ul>
 					)}
 				</div>
 			) : null}
