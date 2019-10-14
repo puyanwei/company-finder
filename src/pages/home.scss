@@ -1,7 +1,7 @@
 .homepage-container {
-	border: 1px solid whitesmoke;
+	max-width: 35rem;
+	margin: 2rem auto;
 	display: grid;
-	margin: 1rem 5rem;
 	padding: 1rem;
 	grid-template-columns: 1fr 1fr;
 	// prettier-ignore

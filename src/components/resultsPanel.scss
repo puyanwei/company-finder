@@ -1,14 +1,12 @@
 .results-container {
+	max-width: 35rem;
+	margin: 2rem auto;
 	padding: 1rem;
-	border: 1px solid whitesmoke;
-	margin-left: 5rem;
-	margin-right: 5rem;
 	grid-area: results;
 	text-align: left;
 
 	.query-message {
 		text-align: center;
-		margin-top: 1rem;
 		color: #90b1aa;
 		.query {
 			font-size: 20px;
@@ -18,5 +16,6 @@
 
 	ul {
 		list-style-type: none;
+		padding-left: 0;
 	}
 }
