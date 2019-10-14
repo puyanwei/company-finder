@@ -5,25 +5,28 @@ import PropTypes from 'prop-types'
 import Company from './Company';
 import './resultsPanel.scss'
 
-const ResultsPanel = ({data, queryValue, createUniqueKey})=> {
+const ResultsPanel = ({ data, queryValue, createUniqueKey }) => {
     return (
         <>
-            {data ? 
+            {data ?
                 <div className="results-container">
-                    <p className="query-message">{data.length} RESULT{data.length !== 1? "S": null} FOR <span className="query">"{queryValue.current.value}"</span></p>
+                    <p className="query-message">{data.length} RESULT{data.length !== 1 ? "S" : null} FOR <span className="query">"{queryValue.current.value}"</span></p>
                     <ul>
                         {data.map(company => <Company companyData={company} key={createUniqueKey(company)} />)}
                     </ul>
                 </div>
-            : null}
-        </>    
+                : null}
+        </>
     )
 }
 
 ResultsPanel.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    data: PropTypes.arrayOf(PropTypes.object),
     queryValue: PropTypes.object.isRequired,
     createUniqueKey: PropTypes.func.isRequired
 };
 
+ResultsPanel.defaultProps = {
+    data: null
+}
 export default ResultsPanel
