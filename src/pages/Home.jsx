@@ -54,7 +54,11 @@ const Home = () => {
             .finally(()=> {
                 setIsLoading(false);
             })
-	};
+    };
+    
+    const createUniqueKey = (company) => {
+			return company.Name ? `${company.Name}${company.Abn}` : `${company.EntityName}${company.Abn}`
+    }
 
 	return (
         <>
@@ -84,7 +88,7 @@ const Home = () => {
                             <div className="results-container">
                                 <p className="query-message">X RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
                                 <ul>
-                                    {data.map(company => <Company companyData={company} />)}
+                                    {data.map(company => <Company companyData={company} key={createUniqueKey(company)} />)}
                                 </ul>
                             </div>
                         : null
