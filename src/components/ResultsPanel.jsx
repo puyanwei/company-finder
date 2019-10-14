@@ -7,7 +7,7 @@ const resultsPanel = ({data, queryValue, createUniqueKey})=> {
         <>
             {data ? 
                 <div className="results-container">
-                    <p className="query-message">X RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
+                    <p className="query-message">{data.length} RESULT{data.length !== 1? "S": null} FOR <span className="query">"{queryValue.current.value}"</span></p>
                     <ul>
                         {data.map(company => <Company companyData={company} key={createUniqueKey(company)} />)}
                     </ul>
