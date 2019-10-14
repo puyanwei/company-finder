@@ -78,19 +78,20 @@ const Home = () => {
 
                 {isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
             </div>
+            <>
+                {isLoading ? (<h2>LOADING...</h2>)
+                : (
+                <div className="results-container">
+                    <p className="query-message">X RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
+                    <ul>
+                        <Company companyData={data} />
+                    </ul>
+                </div>
+                )}
+            </>    
+        </>
+    )
+}
 
-            <div className="results-container">
-                {isLoading ? <h2>LOADING...</h2>
-                : data ? (
-                        <>
-                            <p className="query-message">RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
-                            <ul>
-                                <Company key={`${data.Abn}`} companyData={data} />
-                            </ul>
-                        </>
-                ) : null}
-            </div>
-        </>)
-};
 
 export default Home;
