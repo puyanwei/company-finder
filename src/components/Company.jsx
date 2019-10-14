@@ -11,7 +11,8 @@ const Company = ({ companyData }) => {
 
 	return (
 		<li className="company-title" onClick={() => setIsHidden(!isHidden)}>
-			{/* {title} */}
+			{companyData.Name ? companyData.Name : companyData.EntityName}
+
 			{!isHidden ? (
 				<ul onClick={(e) => ignoreParentClick(e)}>
 					{Object.keys(companyData).map((key) => (

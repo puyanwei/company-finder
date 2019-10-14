@@ -39,7 +39,6 @@ const Home = () => {
 
 		fetch(`https://abr.business.gov.au/json/${url}`)
 			.then((response) => {
-                console.log(url)
 				return response.text();
 			})
 			.then((result) => {
@@ -79,19 +78,21 @@ const Home = () => {
                 {isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
             </div>
             <>
-                {isLoading ? (<h2>LOADING...</h2>)
-                : (
-                <div className="results-container">
-                    <p className="query-message">X RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
-                    <ul>
-                        <Company companyData={data} />
-                    </ul>
-                </div>
-                )}
+                {isLoading ? <h2>LOADING...</h2>
+                    : (
+                        data ? 
+                            <div className="results-container">
+                                <p className="query-message">X RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
+                                <ul>
+                                    {data.map(company => <Company companyData={company} />)}
+                                </ul>
+                            </div>
+                        : null
+                    )
+                }
             </>    
         </>
     )
 }
-
 
 export default Home;
