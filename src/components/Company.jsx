@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import './company.scss';
 
@@ -25,6 +26,10 @@ const Company = ({ companyData }) => {
 			) : null}
 		</li>
 	);
+};
+
+Company.propTypes = {
+	companyData: PropTypes.objectOf(PropTypes.string).isRequired
 };
 
 export default Company;

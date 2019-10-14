@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import './formPanel.scss';
 
 const FormPanel = ({ guidValue, queryValue, handleSubmit }) => {
@@ -15,6 +17,12 @@ const FormPanel = ({ guidValue, queryValue, handleSubmit }) => {
 			<button type="submit">SUBMIT</button>
 		</form>
 	);
+};
+
+FormPanel.propTypes = {
+	guidValue: PropTypes.arrayOf(PropTypes.object).isRequired,
+	queryValue: PropTypes.arrayOf(PropTypes.object).isRequired,
+	handleSubmit: PropTypes.func.isRequired
 };
 
 export default FormPanel;

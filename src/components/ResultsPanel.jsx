@@ -1,8 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
+
 import Company from './Company';
 import './resultsPanel.scss'
 
-const resultsPanel = ({data, queryValue, createUniqueKey})=> {
+const ResultsPanel = ({data, queryValue, createUniqueKey})=> {
     return (
         <>
             {data ? 
@@ -17,4 +20,10 @@ const resultsPanel = ({data, queryValue, createUniqueKey})=> {
     )
 }
 
-export default resultsPanel
+ResultsPanel.propTypes = {
+    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    queryValue: PropTypes.object.isRequired,
+    createUniqueKey: PropTypes.func.isRequired
+};
+
+export default ResultsPanel
