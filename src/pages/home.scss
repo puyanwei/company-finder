@@ -9,6 +9,7 @@
         "title title" 
         "desc desc" 
         "form form"
+        "error error"
         "results results";
 
 	.homepage-title {
@@ -19,6 +20,7 @@
 	}
 
 	.error-message {
+		grid-area: error;
 		color: rgb(216, 78, 91);
 		margin: 0 auto;
 	}
