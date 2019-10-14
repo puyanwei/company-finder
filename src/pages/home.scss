@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
-
 .homepage-container {
 	border: 1px solid whitesmoke;
 	display: grid;
@@ -20,81 +18,8 @@
 		grid-area: desc;
 	}
 
-	form {
-		grid-area: form;
-
-		.container-input {
-			display: block;
-			margin: 0 auto;
-
-			label {
-				margin-right: 1rem;
-				color: #90b1aa;
-			}
-
-			input {
-				display: inline-block;
-				width: 14rem;
-				background: transparent;
-				border: none;
-				border-bottom: 1px solid #526b66;
-				color: whitesmoke;
-				margin-bottom: 1rem;
-				padding-left: 0.5rem;
-				padding-right: 0.5rem;
-				font-family: 'Roboto Condensed', sans-serif;
-			}
-
-			input:focus {
-				outline: none;
-			}
-		}
-
-		.container-input:nth-child(1) {
-			margin-right: 0.5rem;
-		}
-
-		button {
-			display: block;
-			background-color: rgb(216, 78, 91);
-			color: white;
-			width: 8rem;
-			height: 2rem;
-			border: none;
-			font-size: 14px;
-			cursor: pointer;
-			margin: 0 auto;
-			margin-top: 1rem;
-			margin-bottom: 1rem;
-			border-radius: 5px;
-		}
-	}
-
 	.error-message {
 		color: rgb(216, 78, 91);
 		margin: 0 auto;
-	}
-}
-
-.results-container {
-	padding: 1rem;
-	border: 1px solid whitesmoke;
-	margin-left: 5rem;
-	margin-right: 5rem;
-	grid-area: results;
-	text-align: left;
-
-	.query-message {
-		text-align: center;
-		margin-top: 1rem;
-		color: #90b1aa;
-		.query {
-			font-size: 20px;
-			color: whitesmoke;
-		}
-	}
-
-	ul {
-		list-style-type: none;
 	}
 }

@@ -1,0 +1,22 @@
+.results-container {
+	padding: 1rem;
+	border: 1px solid whitesmoke;
+	margin-left: 5rem;
+	margin-right: 5rem;
+	grid-area: results;
+	text-align: left;
+
+	.query-message {
+		text-align: center;
+		margin-top: 1rem;
+		color: #90b1aa;
+		.query {
+			font-size: 20px;
+			color: whitesmoke;
+		}
+	}
+
+	ul {
+		list-style-type: none;
+	}
+}

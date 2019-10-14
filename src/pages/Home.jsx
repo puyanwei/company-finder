@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 
-import Company from '../components/Company';
+import FormPanel from '../components/FormPanel';
+import ResultsPanel from '../components/ResultsPanel';
 import './home.scss';
 
 const Home = () => {
@@ -11,7 +12,7 @@ const Home = () => {
 	const [ isLoading, setIsLoading ] = useState(false);
 
 	const handleSubmit = (e) => {
-        e.preventDefault();
+		e.preventDefault();
 		console.log('submitting...');
 		setIsLoading(true);
 		nameOrABNQueryURL();
@@ -42,23 +43,23 @@ const Home = () => {
 				return response.text();
 			})
 			.then((result) => {
-                let hash = result.replace(removeString, '').slice(0, -1);
-                hash = JSON.parse(hash)
-				removeString === 'nameCallback('? setData(hash.Names) : setData([hash])
+				let hash = result.replace(removeString, '').slice(0, -1);
+				hash = JSON.parse(hash);
+				removeString === 'nameCallback(' ? setData(hash.Names) : setData([ hash ]);
 			})
 			.catch((err) => {
 				console.log(err);
 				setIsLoading(false);
 				setIsError(true);
-            })
-            .finally(()=> {
-                setIsLoading(false);
-            })
-    };
-    
-    const createUniqueKey = (company) => {
-			return company.Name ? `${company.Name}${company.Abn}` : `${company.EntityName}${company.Abn}`
-    }
+			})
+			.finally(() => {
+				setIsLoading(false);
+			});
+	};
+
+	const createUniqueKey = (company) => {
+		return company.Name ? `${company.Name}${company.Abn}` : `${company.EntityName}${company.Abn}`;
+	};
 
 	return (
         <>
@@ -67,36 +68,16 @@ const Home = () => {
 
                 <p className="homepage-description">Search by ABN or name. You will need a GUID key to search.</p>
 
-                <form onSubmit={(e) => handleSubmit(e)}>
-                    <div className="container-input">
-                        <label>GUID KEY</label>
-                        <input type="text" ref={guidValue} required />
-                    </div>
-                    <div className="container-input">
-                        <label>SEARCH</label>
-                        <input type="text" ref={queryValue} required />
-                    </div>
-                    <button type="submit">SUBMIT</button>
-                </form>
+                <FormPanel isError={isError} guidValue={guidValue} queryValue={queryValue} handleSubmit={handleSubmit} />
 
                 {isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
             </div>
             <>
-                {isLoading ? <h2>LOADING...</h2>
-                    : (
-                        data ? 
-                            <div className="results-container">
-                                <p className="query-message">X RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
-                                <ul>
-                                    {data.map(company => <Company companyData={company} key={createUniqueKey(company)} />)}
-                                </ul>
-                            </div>
-                        : null
-                    )
-                }
-            </>    
+                {isLoading ? 
+                    <h2>LOADING...</h2> : <ResultsPanel data={data} queryValue={queryValue} createUniqueKey={createUniqueKey} />}
+            </>
         </>
-    )
-}
+	);
+};
 
 export default Home;

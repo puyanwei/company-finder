@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
+
+form {
+	grid-area: form;
+
+	.container-input {
+		display: block;
+		margin: 0 auto;
+
+		label {
+			margin-right: 1rem;
+			color: #90b1aa;
+		}
+
+		input {
+			display: inline-block;
+			width: 14rem;
+			background: transparent;
+			border: none;
+			border-bottom: 1px solid #526b66;
+			color: whitesmoke;
+			margin-bottom: 1rem;
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+			font-family: 'Roboto Condensed', sans-serif;
+		}
+
+		input:focus {
+			outline: none;
+		}
+	}
+
+	.container-input:nth-child(1) {
+		margin-right: 0.5rem;
+	}
+
+	button {
+		display: block;
+		background-color: rgb(216, 78, 91);
+		color: white;
+		width: 8rem;
+		height: 2rem;
+		border: none;
+		font-size: 14px;
+		cursor: pointer;
+		margin: 0 auto;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		border-radius: 5px;
+	}
+}
