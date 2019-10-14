@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import './company.scss';
 
-const Company = ({ companyData, title }) => {
+const Company = ({ companyData }) => {
 	const [ isHidden, setIsHidden ] = useState(true);
 
 	const ignoreParentClick = (e) => {
@@ -11,7 +11,7 @@ const Company = ({ companyData, title }) => {
 
 	return (
 		<li className="company-title" onClick={() => setIsHidden(!isHidden)}>
-			{title}
+			{/* {title} */}
 			{!isHidden ? (
 				<ul onClick={(e) => ignoreParentClick(e)}>
 					{Object.keys(companyData).map((key) => (

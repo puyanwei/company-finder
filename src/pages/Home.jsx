@@ -39,12 +39,13 @@ const Home = () => {
 
 		fetch(`https://abr.business.gov.au/json/${url}`)
 			.then((response) => {
+                console.log(url)
 				return response.text();
 			})
 			.then((result) => {
-				let hash = result.replace(removeString, '');
-				hash = hash.slice(0, -1);
-				setData(JSON.parse(hash));
+                let hash = result.replace(removeString, '').slice(0, -1);
+                hash = JSON.parse(hash)
+				removeString === 'nameCallback('? setData(hash.Names) : setData([hash])
 			})
 			.catch((err) => {
 				console.log(err);
@@ -58,54 +59,38 @@ const Home = () => {
 
 	return (
         <>
-		<div className="homepage-container">
-			<h1 className="homepage-title">ABN LOOKUP</h1>
+            <div className="homepage-container">
+                <h1 className="homepage-title">ABN LOOKUP</h1>
 
-            <p className="homepage-description">Search by ABN or name. You will need a GUID key to search.</p>
+                <p className="homepage-description">Search by ABN or name. You will need a GUID key to search.</p>
 
-			<form onSubmit={(e) => handleSubmit(e)}>
-                <div className="container-input">
-                    <label>GUID KEY</label>
-                    <input type="text" ref={guidValue} required />
-                </div>
-                <div className="container-input">
-                    <label>SEARCH</label>
-                    <input type="text" ref={queryValue} required />
-                </div>
-				<button type="submit">SUBMIT</button>
-			</form>
+                <form onSubmit={(e) => handleSubmit(e)}>
+                    <div className="container-input">
+                        <label>GUID KEY</label>
+                        <input type="text" ref={guidValue} required />
+                    </div>
+                    <div className="container-input">
+                        <label>SEARCH</label>
+                        <input type="text" ref={queryValue} required />
+                    </div>
+                    <button type="submit">SUBMIT</button>
+                </form>
 
-			{isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
+                {isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
+            </div>
 
-		</div>
-			{isLoading ? (
-				<h2>LOADING...</h2>
-			) : data ? (
-				<div className="results-container">
-					{data.Message.length === 0 && !isError ? (
+            <div className="results-container">
+                {isLoading ? <h2>LOADING...</h2>
+                : data ? (
                         <>
                             <p className="query-message">RESULTS FOR <span className="query">"{queryValue.current.value}"</span></p>
                             <ul>
-                                {data.EntityName?
-                                <Company key={`${data.EntityName} ${data.Abn}`} companyData={data} title={data.EntityName} />
-                                :
-                                <>
-                                {data.Names.map((company) => (
-                                    <Company key={`${company.Name} ${company.Abn}`} companyData={company} title={company.Name} />
-                                ))}
-                                </>
-                                }
+                                <Company key={`${data.Abn}`} companyData={data} />
                             </ul>
                         </>
-					) : (
-						<p className="query-message">
-							NO RESULTS FOR <span className="query">"{queryValue.current.value}"</span>
-						</p>
-					)}
-				</div>
-            ) : null}
-        </>
-	);
+                ) : null}
+            </div>
+        </>)
 };
 
 export default Home;
