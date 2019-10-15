@@ -1,68 +1,97 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Company Finder
 
-## Available Scripts
+This app lets you search for company details when you query a name or ABN number.
 
-In the project directory, you can run:
+Searching by name will give you upto 10 results.
 
-### `yarn start`
+<img src="https://user-images.githubusercontent.com/14803518/66860672-8bffd980-ef85-11e9-87c7-b1da0a483769.png" alt="name search screenshot" width="400"/>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Clicking on each result will reveal more details.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+<img src="https://user-images.githubusercontent.com/14803518/66860673-8c987000-ef85-11e9-92ee-9df5d400f7c7.png" alt="name search open screenshot" width="400"/>
 
-### `yarn test`
+Searching by ABN number will show the corresponding company if it matches.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="https://user-images.githubusercontent.com/14803518/66860675-8c987000-ef85-11e9-9aa6-7173a04bd808.png" alt="name search screenshot" width="400"/>
 
-### `yarn build`
+Incorrect GUID key will show an error message.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://user-images.githubusercontent.com/14803518/66867961-4eef1380-ef94-11e9-8b0f-9a96e6b62d8a.png" alt="error message screenshot" height="400"/>
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+Reponsive layout means mobile usage is possble.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img src="https://user-images.githubusercontent.com/14803518/66866021-60362100-ef90-11e9-90ed-121461b724dc.png" alt="name search screenshot" height="450"/>
 
-### `yarn eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Installation
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Due to a blocker this project needs to unlock CORS in order for the api to grant acess to their data. I did this using the Moesif CORS [Chrome extension](https://chrome.google.com/webstore/detail/moesif-orign-cors-changer/digfbfaphojjndkpccljibejjbppifbc).
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+After you put in your GUID key, please turn on the CORS Chrome extension before clicking the submit button. Warning - this will effect all tabs so remember to turn this off once usage is completed.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Moesif CORS](https://user-images.githubusercontent.com/14803518/66866548-70023500-ef91-11e9-98f5-264e4730ef5d.png)
 
-## Learn More
+This project is deployed at https://puyanwei.github.io/company-finder
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+To run the project locally put the following into your terminal;
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```
+git clone https://github.com/puyanwei/company-finder.git
+cd company-finder
+npm install
+npm start
+```
 
-### Code Splitting
+## Tech Stack
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+- React Hooks and complete pure functional components
+- SCSS SASS Styling
+- ES6 Javascript
+- HTML
 
-### Analyzing the Bundle Size
+For source control I used [Gitkraken](https://www.gitkraken.com/)
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+## Planning
 
-### Making a Progressive Web App
+I started out by drawing how I thought the page would look. That helped me think about how to split up my components and structure my code. At first I thought I would use a radio button to toggle between a name search and an ABD number, but this didn't pan out that way in the end.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+<img src="https://user-images.githubusercontent.com/14803518/66866549-70023500-ef91-11e9-9a01-182a600f553e.jpg" alt="plan" height="400"/>
 
-### Advanced Configuration
+I planned to work my way down the list, making small changes at a time and committing them, working in an agile fashion.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+After setting up the environment, my plan was to get a MVP version up and running with a basic structure, fetch the data, refactor it up into smaller components if needs be, and then work on the styling.
 
-### Deployment
+## Hurdles
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+### Cors and Fetching Issues
 
-### `yarn build` fails to minify
+It was a struggle dealing with the issues when fetching the data from the API, this was and still is my main blocker. Although I had found a temporary solution I did not find a way to avoid the 'No CORS' security issue.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Initially I had a 'No Cors' error in the console, of which I knew that you could add a 'mode: no-cors' option in the fetch. However this did not solve the issue. It was confusing as the call was successful (I used [Postman](https://www.getpostman.com/) to check if all was correct) but it was returning a limited if not minimal response.
+
+In the data it had `Response { type:"opaque", ... }`
+
+After some more research I realised this was another security issue related to Cors only. I found the Chrome extension Moesif CORS to help me bypass this issue.
+
+Once I had successfully fetched the data, I realised it was not in a typical JSON structure. It was in text format and also had the data wrapped in a parameter of a function. I had to add `text/plain; charset=ISO-8859-1` to the header to get the data  be fetch in the text format.
+
+### Conditional Trees
+
+I realised that there were quite a few different outcomes to different scenarios. This was making the code that renders to the page to become rather complex and unmanagable with the multiple nested ternary operators in jsx.
+
+So writing out the outcomes in a tree format helped.
+
+<img src="https://user-images.githubusercontent.com/14803518/66866547-6f699e80-ef91-11e9-9f7a-99459a71a145.jpg" alt="conditional tree" height="400"/>
+
+This also helped me realise that I could reduce the conditionals if I made the data format reusable by my `Company.jsx` component. So I manipulated the data after it was fetched so that whether it was multiple or just a single object it would be available in an array. This helped me reuse my component and cut out the duplicate outcomes of checking which type of search it was.
+
+## Future Improvements?
+
+Some potential future features that could be added;
+
+- Refactoring the fetch function into its own custom hook that could scale up if other types of queries are wanted by the user.
+- Accounts for users so they can save their GUID key.
+- A centralised state management system as the application grows using useContext and useReducer.
+- More comprehensive testing using testing-library/@react.
+
+It has been a great project to work on, pleasently surprised at how React has improved so much with hooks and also incorperating scss without a compiler! I am still rather confused about the CORS issues, I will have to continue researching. Recently I have been diving into React hooks and this was a great excuse to get more stuck in, I have learned a lot over the past few days.
