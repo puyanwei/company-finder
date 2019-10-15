@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/company-finder/static/css/main.da536f48.chunk.css",
-    "main.js": "/company-finder/static/js/main.92d5a1e5.chunk.js",
-    "main.js.map": "/company-finder/static/js/main.92d5a1e5.chunk.js.map",
+    "main.css": "/company-finder/static/css/main.c2b5a069.chunk.css",
+    "main.js": "/company-finder/static/js/main.2f71213f.chunk.js",
+    "main.js.map": "/company-finder/static/js/main.2f71213f.chunk.js.map",
     "runtime-main.js": "/company-finder/static/js/runtime-main.8d7c6cf9.js",
     "runtime-main.js.map": "/company-finder/static/js/runtime-main.8d7c6cf9.js.map",
     "static/js/2.f4d0b975.chunk.js": "/company-finder/static/js/2.f4d0b975.chunk.js",
     "static/js/2.f4d0b975.chunk.js.map": "/company-finder/static/js/2.f4d0b975.chunk.js.map",
     "index.html": "/company-finder/index.html",
-    "precache-manifest.8d0f49d8c2c1f3c8fbe650686e451ae7.js": "/company-finder/precache-manifest.8d0f49d8c2c1f3c8fbe650686e451ae7.js",
+    "precache-manifest.725801d0a3ff94ec68a6480bb8962849.js": "/company-finder/precache-manifest.725801d0a3ff94ec68a6480bb8962849.js",
     "service-worker.js": "/company-finder/service-worker.js",
-    "static/css/main.da536f48.chunk.css.map": "/company-finder/static/css/main.da536f48.chunk.css.map"
+    "static/css/main.c2b5a069.chunk.css.map": "/company-finder/static/css/main.c2b5a069.chunk.css.map"
   },
   "entrypoints": [
     "static/js/runtime-main.8d7c6cf9.js",
     "static/js/2.f4d0b975.chunk.js",
-    "static/css/main.da536f48.chunk.css",
-    "static/js/main.92d5a1e5.chunk.js"
+    "static/css/main.c2b5a069.chunk.css",
+    "static/js/main.2f71213f.chunk.js"
   ]
 }
