@@ -95,3 +95,12 @@ Some potential future features that could be added;
 - More comprehensive testing using testing-library/@react.
 
 It has been a great project to work on, pleasently surprised at how React has improved so much with hooks and also incorperating scss without a compiler! I am still rather confused about the CORS issues, I will have to continue researching. Recently I have been diving into React hooks and this was a great excuse to get more stuck in, I have learned a lot over the past few days.
+
+## Feedback!
+
+Thanks so much for the feedback, some improvements to note;
+
+- Combine all setState hooks into using an object instead. Having them as different setStates will cause a rerender and could lead to unwanted outcomes especially if you change different states in the same function, for example.
+- Choose onChange over using useRef. We want to keep things functional over declarative programming.
+- Solving the CORS issue was to wrap it in a proxy that imitated the correct header information.
+- If you have a conditional which returns itself it itself exists else return other, you can use the pipe 'Or' operator (see createUniqueKey function)
