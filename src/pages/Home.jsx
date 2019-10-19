@@ -1,27 +1,33 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 
 import FormPanel from '../components/FormPanel';
 import ResultsPanel from '../components/ResultsPanel';
 import './home.scss';
 
 const Home = () => {
-	const guidValue = useRef('');
-	const queryValue = useRef('');
-    const [ data, setData ] = useState(null);
+    const [ formInput, setFormInput ] = useState({guid: "", query: ""});
     const [ state, setState ] = useState({isError:false, isLoading: false});
+    const [ formData, setFormData ] = useState(null);
 
     const { isError, isLoading } = state
+    const { guid, query } = formInput
 
     const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting...');
 		setState({...state, isLoading:true});
 		nameOrABNQueryURL();
-	};
+    };
+    
+    const handleKeyPress = (e) => {
+        const {name, value} = e.target;
+        name === "guid"
+            ?
+            setFormInput({ ...formInput, guid: value })
+            : setFormInput({ ...formInput, query: value })
+    }
 
 	const nameOrABNQueryURL = () => {
-		let query = queryValue.current.value;
-		let guid = guidValue.current.value;
 		let removeString;
 		let url;
 
@@ -46,7 +52,7 @@ const Home = () => {
 			.then((result) => {
 				let hash = result.replace(removeString, '').slice(0, -1);
 				hash = JSON.parse(hash);
-				removeString === 'nameCallback(' ? setData(hash.Names) : setData([ hash ]);
+				removeString === 'nameCallback(' ? setFormData(hash.Names) : setFormData([ hash ]);
 			})
 			.catch((err) => {
                 console.log(err);
@@ -57,9 +63,7 @@ const Home = () => {
 			});
 	};
 
-	const createUniqueKey = (company) => {
-		return company.Name || `${company.EntityName}${company.Abn}`;
-	};
+	const createUniqueKey = (company) => `${company.EntityName}${company.Abn}`;
 
 	return (
         <>
@@ -68,13 +72,15 @@ const Home = () => {
 
                 <p className="homepage-description">Search by ABN or name. You will need a GUID key to search.</p>
 
-                <FormPanel isError={isError} guidValue={guidValue} queryValue={queryValue} handleSubmit={handleSubmit} />
+                <FormPanel isError={isError} handleSubmit={handleSubmit} handleKeyPress={handleKeyPress} />
 
                 {isError ? <p className="error-message">GUID Key is incorrect, please check again</p> : null}
             </div>
             <>
-                {isLoading ? 
-                    <h2>LOADING...</h2> : <ResultsPanel data={data} queryValue={queryValue} createUniqueKey={createUniqueKey} />}
+                {isLoading
+                    ? 
+                    <h2>LOADING...</h2>
+                    : <ResultsPanel data={formData} queryValue={{query}} createUniqueKey={createUniqueKey} />}
             </>
         </>
 	);

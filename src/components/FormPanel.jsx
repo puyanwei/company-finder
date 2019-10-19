@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 
 import './formPanel.scss';
 
-const FormPanel = ({ guidValue, queryValue, handleSubmit }) => {
+const FormPanel = ({ guidValue, queryValue, handleSubmit, handleKeyPress }) => {
 	return (
 		<form onSubmit={(e) => handleSubmit(e)}>
 			<div className="container-input">
 				<label>GUID KEY</label>
-				<input type="text" ref={guidValue} required />
+				<input type="text" name="guid" onChange={(e) => handleKeyPress(e)} required />
 			</div>
 			<div className="container-input">
 				<label>SEARCH</label>
-				<input type="text" ref={queryValue} required />
+				<input type="text" name="query" onChange={(e) => handleKeyPress(e)} required />
 			</div>
 			<button type="submit">SUBMIT</button>
 		</form>

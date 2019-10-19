@@ -12,7 +12,7 @@ const Company = ({ companyData }) => {
 
 	return (
 		<li className="company-title" onClick={() => setIsHidden(!isHidden)}>
-			{companyData.Name ? companyData.Name : companyData.EntityName}
+			{companyData.Name || companyData.EntityName}
 			<span className="toggle-icon">{isHidden ? '+' : '-'}</span>
 
 			{!isHidden ? (
