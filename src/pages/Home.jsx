@@ -7,14 +7,15 @@ import './home.scss';
 const Home = () => {
 	const guidValue = useRef('');
 	const queryValue = useRef('');
-	const [ data, setData ] = useState(null);
-	const [ isError, setIsError ] = useState(false);
-	const [ isLoading, setIsLoading ] = useState(false);
+    const [ data, setData ] = useState(null);
+    const [ state, setState ] = useState({isError:false, isLoading: false});
 
-	const handleSubmit = (e) => {
+    const { isError, isLoading } = state
+
+    const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting...');
-		setIsLoading(true);
+		setState({...state, isLoading:true});
 		nameOrABNQueryURL();
 	};
 
@@ -48,17 +49,16 @@ const Home = () => {
 				removeString === 'nameCallback(' ? setData(hash.Names) : setData([ hash ]);
 			})
 			.catch((err) => {
-				console.log(err);
-				setIsLoading(false);
-				setIsError(true);
+                console.log(err);
+                setState({isLoading: false, isError: true})
 			})
 			.finally(() => {
-				setIsLoading(false);
+                setState({isLoading: false, ...state})
 			});
 	};
 
 	const createUniqueKey = (company) => {
-		return company.Name ? `${company.Name}${company.Abn}` : `${company.EntityName}${company.Abn}`;
+		return company.Name || `${company.EntityName}${company.Abn}`;
 	};
 
 	return (
