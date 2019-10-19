@@ -22,9 +22,13 @@ const ResultsPanel = ({ data, queryValue, createUniqueKey }) => {
 }
 
 ResultsPanel.propTypes = {
-    data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    data: PropTypes.arrayOf(PropTypes.object),
     queryValue: PropTypes.object.isRequired,
     createUniqueKey: PropTypes.func.isRequired
 };
+
+ResultsPanel.defaultProps = {
+    data: null
+}
 
 export default ResultsPanel

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './formPanel.scss';
 
-const FormPanel = ({ guidValue, queryValue, handleSubmit, handleKeyPress }) => {
+const FormPanel = ({ handleSubmit, handleKeyPress }) => {
 	return (
 		<form onSubmit={(e) => handleSubmit(e)}>
 			<div className="container-input">
@@ -20,8 +20,6 @@ const FormPanel = ({ guidValue, queryValue, handleSubmit, handleKeyPress }) => {
 };
 
 FormPanel.propTypes = {
-	guidValue: PropTypes.arrayOf(PropTypes.object).isRequired,
-	queryValue: PropTypes.arrayOf(PropTypes.object).isRequired,
 	handleSubmit: PropTypes.func.isRequired
 };
 
