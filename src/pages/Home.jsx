@@ -5,8 +5,8 @@ import ResultsPanel from '../components/ResultsPanel';
 import './home.scss';
 
 const Home = () => {
-    const [ formInput, setFormInput ] = useState({guid: "", query: ""});
-    const [ state, setState ] = useState({isError:false, isLoading: false});
+    const [ formInput, setFormInput ] = useState({ guid: "", query: "" });
+    const [ state, setState ] = useState({ isError:false, isLoading: false });
     const [ formData, setFormData ] = useState(null);
 
     const { isError, isLoading } = state
@@ -15,7 +15,7 @@ const Home = () => {
     const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log('submitting...');
-		setState({...state, isLoading:true});
+		setState({ ...state, isLoading: true });
 		nameOrABNQueryURL();
     };
     
@@ -56,10 +56,10 @@ const Home = () => {
 			})
 			.catch((err) => {
                 console.log(err);
-                setState({isLoading: false, isError: true})
+                setState({ isLoading: false, isError: true })
 			})
 			.finally(() => {
-                setState({isLoading: false, ...state})
+                setState({ isLoading: false, ...state })
 			});
 	};
 
