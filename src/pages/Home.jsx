@@ -41,26 +41,20 @@ const Home = () => {
         fetchData(url, removeString);
     };
 
-    const fetchData = (url, removeString) => {
+    const fetchData = async (url, removeString) => {
         const myHeaders = new Headers();
         myHeaders.append('Content-Type', 'text/plain; charset=ISO-8859-1');
 
-        fetch(`https://abr.business.gov.au/json/${url}`)
-            .then((response) => {
-                return response.text();
-            })
-            .then((result) => {
-                let hash = result.replace(removeString, '').slice(0, -1);
-                hash = JSON.parse(hash);
-                removeString === 'nameCallback(' ? setFormData(hash.Names) : setFormData([hash]);
-            })
-            .catch((err) => {
-                console.log(err);
-                setState({ isLoading: false, isError: true })
-            })
-            .finally(() => {
-                setState({ isLoading: false, ...state })
-            });
+        try {
+            let response = await fetch(`https://abr.business.gov.au/json/${url}`)
+            let dataText = await response.text()
+            let hash = JSON.parse(dataText.replace(removeString, '').slice(0, -1));
+            removeString === 'nameCallback(' ? setFormData(hash.Names) : setFormData([hash]);
+        } catch (error) {
+            setState({ isLoading: false, isError: true })
+        } finally {
+            setState({ isLoading: false, ...state })
+        }
     };
 
     const createUniqueKey = (company) => `${company.EntityName}${company.Abn}`;
