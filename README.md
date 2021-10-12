@@ -2,7 +2,7 @@
 
 This app lets you search for company details when you query a name or ABN number.
 
-Searching by name will give you upto 10 results.
+Searching by name will give you up to 10 results.
 
 <img src="https://user-images.githubusercontent.com/14803518/66860672-8bffd980-ef85-11e9-87c7-b1da0a483769.png" alt="name search screenshot" width="400"/>
 
